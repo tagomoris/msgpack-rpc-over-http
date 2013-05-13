@@ -15,8 +15,10 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = MessagePack::RPCOverHTTP::VERSION
 
-  gem.add_development_dependency "rack", "~> 1.4.1"
+  gem.add_runtime_dependency "rack", "~> 1.4.1"
   gem.add_development_dependency "msgpack-jruby", "~> 1.3.2"
-  gem.add_development_dependency "celluloid", "~> 0.12.3"
-  gem.add_development_dependency "httpclient", "~> 2.3.0.1"
+  gem.add_runtime_dependency "celluloid", "~> 0.12.3"
+  gem.add_runtime_dependency "httpclient", "~> 2.3.0.1"
+
+  gem.add_development_dependency "mizuno"
 end
