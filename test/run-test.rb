@@ -8,11 +8,10 @@ require "bundler"
 Bundler.require(:default, :test)
 require "test/unit"
 
-require "msgpack-rpc-over-http"
+require "msgpack-rpc-over-http-jruby"
 require "helper"
 
 test_file = "./test/test_*.rb"
 Dir.glob(test_file) do |file|
   require file
 end
-
