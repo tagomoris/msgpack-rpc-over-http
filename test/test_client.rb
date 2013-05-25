@@ -13,13 +13,20 @@ module MessagePack::RPCOverHTTP
     def setup
       @client = Client.new("http://0.0.0.0:#{@@server_port}/")
       if @@is_stopped_test_app_server
-        pid = fork {
+        # pid = fork {
+        #   Rack::Server.start(config: "test/mock_server.ru", Port: @@server_port)
+        #   exit 0
+        # }
+        # at_exit do
+        #   Process.kill(:INT, pid)
+        #   Process.waitpid(pid)
+        # end
+        @thread = Thread.new do
           Rack::Server.start(config: "test/mock_server.ru", Port: @@server_port)
-          exit 0
-        }
+        end
         at_exit do
-          Process.kill(:INT, pid)
-          Process.waitpid(pid)
+          @thread.kill
+          # @thread.join
         end
         sleep_until_http_server_is_started("0.0.0.0", @@server_port)
         @@is_stopped_test_app_server = false

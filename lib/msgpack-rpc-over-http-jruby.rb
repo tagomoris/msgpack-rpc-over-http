@@ -14,3 +14,10 @@ module MessagePack
     ARGUMENT_ERROR  = 0x02;
   end
 end
+
+# for compatibility between msgpack(cruby) and msgpack-jruby
+class Array
+  def to_msgpack
+    MessagePack.pack(self)
+  end
+end
