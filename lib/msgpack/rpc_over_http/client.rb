@@ -14,6 +14,7 @@ module MessagePack
       def initialize(url, options={})
         @url = url
         @client = HTTPClient.new
+        @encoding = options[:encoding] || Encoding::UTF_8
         @reqtable = {}
         @seqid = 0
       end
@@ -102,7 +103,7 @@ module MessagePack
       end
 
       def get_result(body)
-        type, msgid, err, res = MessagePack.unpack(body, encoding: Encoding::UTF_8)
+        type, msgid, err, res = MessagePack.unpack(body, encoding: @encoding)
         raise "Unknown message type #{type}" if type != RESPONSE
 
         if err.nil?
