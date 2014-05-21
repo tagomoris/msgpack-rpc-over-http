@@ -102,7 +102,7 @@ module MessagePack
       end
 
       def get_result(body)
-        type, msgid, err, res = MessagePack.unpack(body)
+        type, msgid, err, res = MessagePack.unpack(body, encoding: Encoding::UTF_8)
         raise "Unknown message type #{type}" if type != RESPONSE
 
         if err.nil?
